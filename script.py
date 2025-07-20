@@ -1,3 +1,5 @@
+# Requerimientos: Python3, vscode (editor de codigo), pip install python-docx
+# Ejecutar: python3 script.py
 import os
 from docx import Document
 from docx.shared import RGBColor
@@ -8,8 +10,8 @@ def process_docx(path):
 
     def fix_runs(runs):
         for run in runs:
-            run.font.color.rgb = RGBColor(0x00, 0x00, 0x00)
-            run.font.name = "Times New Roman"
+            run.font.color.rgb = RGBColor(0x00, 0x00, 0x00) # Color de la letra
+            run.font.name = "Museo Sans 500" # Colocas el tipo de letra
 
     for para in doc.paragraphs:
         fix_runs(para.runs)
