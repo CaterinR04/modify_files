@@ -1,5 +1,5 @@
 # Requerimientos: Python3, vscode (editor de codigo), pip install python-docx
-# Ejecutar: python3 script.py
+# Ejecutar: python3 script.py #
 import os
 from docx import Document
 from docx.shared import RGBColor
