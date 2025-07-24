@@ -1,9 +1,12 @@
 # Requerimientos: Python3, vscode (editor de codigo), pip install python-docx
 # Ejecutar: python3 script.py #
 import os
+import re
 from docx import Document
 from docx.shared import RGBColor
 
+PATTERN_EXP_CONF = re.compile(r'(?i)\bExponencial\s+Confirming\b(?!\s+S\.A\.S)')
+PATTERN_EXP      = re.compile(r'(?i)\bExponencial\b(?!\s+Confirming\s+S\.A\.S)')
 
 def process_docx(path):
     doc = Document(path)
@@ -12,6 +15,10 @@ def process_docx(path):
         for run in runs:
             run.font.color.rgb = RGBColor(0x00, 0x00, 0x00) # Color de la letra
             run.font.name = "Museo Sans 500" # Colocas el tipo de letra
+            text = run.text
+            text = PATTERN_EXP_CONF.sub("Mente", text) # Aqui se cambia "Exponencial Confirming" por la palabra que se quiera reemplazar
+            text = PATTERN_EXP.sub("Mente", text)  # Aqui se cambia "Exponencial" por la palabra que se quiera reemplazar
+            run.text = text
 
     for para in doc.paragraphs:
         fix_runs(para.runs)
